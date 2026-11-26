@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: mcp-gateway-presentation
+    runtime: static
+    buildCommand: echo "static site, no build"
+    staticPublishPath: .
