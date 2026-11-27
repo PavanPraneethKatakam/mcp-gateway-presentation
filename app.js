@@ -61,7 +61,7 @@ const LINE = { title:'Validation F1 vs decision threshold', subtitle:'Injection 
   highlightX:.5, highlightLabel:'shipped threshold 0.5',
   series:[ {name:'Rules', color:'#8a8f99', values:[.457,.457,.457,.288,.222], width:6},
            {name:'A', color:'#2d3fd0', values:[.889,.889,.902,.885,.892], width:7},
-           {name:'M', color:'#ef4a2a', values:[.894,.897,.911,.893,.901], width:5} ] };
+           {name:'N', color:'#ef4a2a', values:[.896,.947,.961,.959,.961], width:5} ] };
 const BAR = { title:'Recall by attack category', subtitle:'1,000 end-to-end traces · share of attack traces held or blocked',
   yLabel:'Recall', categories:['Prompt injection','Privilege escalation','PII exfiltration','Anomalous behaviour','External comms','All attacks'],
   yMin:0, yMax:1, yStep:.25, yFormat:v=>v.toFixed(2),

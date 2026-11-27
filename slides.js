@@ -246,8 +246,8 @@ window.SLIDES = [
 
 /* ================= results ================= */
 { world:'rack', cam:'board', board:'line', time:55, title:'Result 1: threshold sweep',
-  html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> The learned classifier beats rules at every threshold, and 0.5 is not cherry-picked.<br><b>Verdict</b> Holds: F1 ≈ 0.89–0.91 across 0.3–0.7; rules fall to 0.22.</div>`,
-  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (shipped), candidate M. The learned lines are flat and high, so the result is not an artefact of one threshold.` },
+  html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> The learned classifier beats rules at every threshold, and 0.5 is not cherry-picked.<br><b>Verdict</b> Holds: model A F1 ≈ 0.89–0.90 across 0.3–0.7, candidate N 0.90–0.96; rules fall to 0.22.</div>`,
+  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (shipped), candidate N (latest, not shipped). The learned lines are flat and high, so the result is not an artefact of one threshold.` },
 
 { world:'rack', cam:'board', board:'bar', time:55, title:'Result 2: 1,000 traces',
   html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> Adding ML catches injections without losing the other categories.<br><b>Verdict</b> Holds: all-attack recall 0.79 → 0.99; injection 0 → 1.0. Cost: 3% false alarms, mean 3.8 → 6.8 ms per call.</div>`,
@@ -259,10 +259,10 @@ window.SLIDES = [
   <div class="lim in" style="--d:.7s">
     <div><b>0.617</b><span>recall, deepset (human-written)</span></div>
     <div><b>30%</b><span>benign jailbreak-set prompts flagged</span></div>
-    <div><b>12</b><span>retrained candidates, none promoted</span></div>
+    <div><b>13</b><span>candidates, none promoted</span></div>
   </div>
-  <div class="foot in" style="--d:1.1s;top:860px">Latest candidate M: Gandalf recall 0.705 → 0.911, jailbreak false alarms 0.301 → 0.228, every other number equal or better, but two benign research documents still flagged. The pre-registered gate says keep model A.</div>`,
-  notes:`Twelve candidates were declared before training and all were rejected by the gate. That is the honest boundary of the result.` },
+  <div class="foot in" style="--d:1.1s;top:860px">Latest candidate N (BGE guard cascade): Gandalf recall 0.705 → 0.946, jailbreak false alarms 0.301 → 0.049, deepset recall 0.617 → 0.683, better on every test set, but one benign research document is still flagged. The pre-registered gate says keep model A.</div>`,
+  notes:`Thirteen candidates were declared before training and all were rejected by the gate. N came closest: it fixed one of the two flagged research documents and only research/llm_security.md (0.98, needs below 0.6) still fails. On the 1,000 gateway traces N makes the same decisions as A, at about twice the p99 latency. That is the honest boundary of the result.` },
 
 { world:'net', cam:'end', time:25, title:'Close',
   html:`<div class="t-xl in" style="--d:.3s">Every tool call,<br>inspected before it runs.</div>
