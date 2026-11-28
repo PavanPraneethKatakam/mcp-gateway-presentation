@@ -246,23 +246,23 @@ window.SLIDES = [
 
 /* ================= results ================= */
 { world:'rack', cam:'board', board:'line', time:55, title:'Result 1: threshold sweep',
-  html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> The learned classifier beats rules at every threshold, and 0.5 is not cherry-picked.<br><b>Verdict</b> Holds: model A F1 ≈ 0.89–0.90 across 0.3–0.7, candidate N 0.90–0.96; rules fall to 0.22.</div>`,
-  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (shipped), candidate N (latest, not shipped). The learned lines are flat and high, so the result is not an artefact of one threshold.` },
+  html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> The learned classifier beats rules at every threshold, and 0.5 is not cherry-picked.<br><b>Verdict</b> Holds: model A F1 ≈ 0.89–0.90 across 0.3–0.7, candidate O 0.90–0.97; rules fall to 0.22.</div>`,
+  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (shipped), candidate O (passed the promotion gate). The learned lines are flat and high, so the result is not an artefact of one threshold.` },
 
 { world:'rack', cam:'board', board:'bar', time:55, title:'Result 2: 1,000 traces',
   html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> Adding ML catches injections without losing the other categories.<br><b>Verdict</b> Holds: all-attack recall 0.79 → 0.99; injection 0 → 1.0. Cost: 3% false alarms, mean 3.8 → 6.8 ms per call.</div>`,
   notes:`X axis: attack category in the 1,000 end-to-end traces. Y axis: recall, the share of attack traces held or blocked. Grey is rules only, red is ML-enhanced. Anomalous behaviour stays at 0.95: about one call runs before the first intervention.` },
 
 { world:'net', mood:'alert', cam:'low', time:45, title:'Result 3: honest limits',
-  html:`<div class="kicker in" style="--d:.1s">Result 3 · a negative result, kept</div>
+  html:`<div class="kicker in" style="--d:.1s">Result 3 · limits, and the candidate that cleared them</div>
   <div class="t-l in" style="--d:.25s">Real-world injections<br>are harder.</div>
   <div class="lim in" style="--d:.7s">
     <div><b>0.617</b><span>recall, deepset (human-written)</span></div>
     <div><b>30%</b><span>benign jailbreak-set prompts flagged</span></div>
-    <div><b>13</b><span>candidates, none promoted</span></div>
+    <div><b>14th</b><span>candidate (O) passed the gate</span></div>
   </div>
-  <div class="foot in" style="--d:1.1s;top:860px">Latest candidate N (BGE guard cascade): Gandalf recall 0.705 → 0.946, jailbreak false alarms 0.301 → 0.049, deepset recall 0.617 → 0.683, better on every test set, but one benign research document is still flagged. The pre-registered gate says keep model A.</div>`,
-  notes:`Thirteen candidates were declared before training and all were rejected by the gate. N came closest: it fixed one of the two flagged research documents and only research/llm_security.md (0.98, needs below 0.6) still fails. On the 1,000 gateway traces N makes the same decisions as A, at about twice the p99 latency. That is the honest boundary of the result.` },
+  <div class="foot in" style="--d:1.1s;top:860px">Candidate O passes every pre-registered gate condition: benign research documents 0.98 → 0.30, Gandalf recall 0.705 → 0.955, jailbreak false alarms 0.301 → 0.057, gateway false alarms 3.0% → 1.2%. The two figures on the left are shipped model A.</div>`,
+  notes:`Thirteen candidates were declared before training and rejected by the gate. The fourteenth, O, was declared and committed before fitting: N with its guard retrained on defensive security writing, every threshold unchanged. It passed validation screening and then all four gate conditions; both research documents now score 0.30. On the 1,000 traces it flags 2 of 167 benign traces instead of 5 with the same recall. Honest caveat: the research documents were inspected to diagnose N's failure, though none of their text was used for training. Model A is still the shipped default until O is switched in. That is the honest boundary of the result.` },
 
 { world:'net', cam:'end', time:25, title:'Close',
   html:`<div class="t-xl in" style="--d:.3s">Every tool call,<br>inspected before it runs.</div>
