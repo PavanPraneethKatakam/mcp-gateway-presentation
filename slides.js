@@ -247,7 +247,7 @@ window.SLIDES = [
 /* ================= results ================= */
 { world:'rack', cam:'board', board:'line', time:55, title:'Result 1: threshold sweep',
   html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> The learned classifier beats rules at every threshold, and 0.5 is not cherry-picked.<br><b>Verdict</b> Holds: model A F1 ≈ 0.89–0.90 across 0.3–0.7, candidate O 0.90–0.97; rules fall to 0.22.</div>`,
-  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (shipped), candidate O (passed the promotion gate). The learned lines are flat and high, so the result is not an artefact of one threshold.` },
+  notes:`X axis: decision threshold on the injection score. Y axis: F1 on the validation sets. Lines: rules, model A (the previous default), candidate O (passed the promotion gate; now the default). The learned lines are flat and high, so the result is not an artefact of one threshold.` },
 
 { world:'rack', cam:'board', board:'bar', time:55, title:'Result 2: 1,000 traces',
   html:`<div class="hyp in" style="--d:.4s"><b>Hypothesis</b> Adding ML catches injections without losing the other categories.<br><b>Verdict</b> Holds: all-attack recall 0.79 → 0.99; injection 0 → 1.0. Cost: 3% false alarms, mean 3.8 → 6.8 ms per call.</div>`,
@@ -261,8 +261,8 @@ window.SLIDES = [
     <div><b>30%</b><span>benign jailbreak-set prompts flagged</span></div>
     <div><b>14th</b><span>candidate (O) passed the gate</span></div>
   </div>
-  <div class="foot in" style="--d:1.1s;top:860px">Candidate O passes every pre-registered gate condition: benign research documents 0.98 → 0.30, Gandalf recall 0.705 → 0.955, jailbreak false alarms 0.301 → 0.057, gateway false alarms 3.0% → 1.2%. The two figures on the left are shipped model A.</div>`,
-  notes:`Thirteen candidates were declared before training and rejected by the gate. The fourteenth, O, was declared and committed before fitting: N with its guard retrained on defensive security writing, every threshold unchanged. It passed validation screening and then all four gate conditions; both research documents now score 0.30. On the 1,000 traces it flags 2 of 167 benign traces instead of 5 with the same recall. Honest caveat: the research documents were inspected to diagnose N's failure, though none of their text was used for training. Model A is still the shipped default until O is switched in. That is the honest boundary of the result.` },
+  <div class="foot in" style="--d:1.1s;top:860px">Candidate O passes every pre-registered gate condition: benign research documents 0.98 → 0.30, Gandalf recall 0.705 → 0.955, jailbreak false alarms 0.301 → 0.057, gateway false alarms 3.0% → 1.2%. The two figures on the left are model A, the previous default. O is now the gateway's default (deepset 0.683, jailbreak false alarms 5.7%).</div>`,
+  notes:`Thirteen candidates were declared before training and rejected by the gate. The fourteenth, O, was declared and committed before fitting: N with its guard retrained on defensive security writing, every threshold unchanged. It passed validation screening and then all four gate conditions; both research documents now score 0.30. On the 1,000 traces it flags 2 of 167 benign traces instead of 5 with the same recall. Honest caveat: the research documents were inspected to diagnose N's failure, though none of their text was used for training. O is now the gateway's default model, with model A as its first stage. Deepset recall is still only 0.683 with O, and none of this is measured on real agent traffic. That is the honest boundary of the result.` },
 
 { world:'net', cam:'end', time:25, title:'Close',
   html:`<div class="t-xl in" style="--d:.3s">Every tool call,<br>inspected before it runs.</div>
